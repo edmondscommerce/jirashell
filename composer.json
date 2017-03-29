@@ -1,0 +1,24 @@
+{
+  "name": "edmondscommerce/jirashell",
+  "description": "A simple PHP class for adding issues on Jira",
+  "keywords": [
+    "Jira",
+    "Shell",
+    "PHP",
+    "Issue Tracking"
+  ],
+  "homepage": "https://www.edmondscommerce.co.uk",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "edmondscommerce",
+      "email": "info@edmondscommerce.co.uk"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "EdmondsCommerce\\JiraShell\\": "src/"
+    }
+  }
+}
