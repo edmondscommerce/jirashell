@@ -2,6 +2,8 @@
 
 namespace EdmondsCommerce\JiraShell;
 
+use Exception;
+
 class JiraShell
 {
     private $jiraUrl = true;
