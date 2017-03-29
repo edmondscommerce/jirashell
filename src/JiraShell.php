@@ -13,15 +13,18 @@ class JiraShell
 
     private $queuedIssues = [];
 
-    const queueFilePath = __DIR__ . '/queue.json';
-    const envFilePath = __DIR__ . '/env';
+    private $queueFilePath;
+    private $envFilePath;
 
-    public function __construct()
+    public function __construct($queueFilePath = null, $envFilePath = null )
     {
-        if (!file_exists(self::envFilePath)) {
-            throw new Exception('env file not found at ' . self::envFilePath);
+        $this->queueFilePath = ($queueFilePath === null) ?  __DIR__ . '/queue.json' : $queueFilePath;
+        $this->envFilePath = ($envFilePath === null) ? __DIR__ . '/env' : $envFilePath;
+
+        if (!file_exists($this->envFilePath)) {
+            throw new Exception('env file not found at ' . $this->envFilePath);
         }
-        $env = file(self::envFilePath);
+        $env = file($this->envFilePath);
         foreach ($env as $item) {
             preg_match('%.*_(.+?)\=(.+?);%', $item, $matches);
             $property = $matches[1];
@@ -31,11 +34,11 @@ class JiraShell
             }
             $this->$property = $value;
         }
-        if (!file_exists(self::queueFilePath)) {
+        if (!file_exists($this->queueFilePath)) {
             $data = json_encode($this->queuedIssues);
-            file_put_contents(self::queueFilePath, $data);
+            file_put_contents($this->queueFilePath, $data);
         } else {
-            $queue = file_get_contents(self::queueFilePath);
+            $queue = file_get_contents($this->queueFilePath);
             $this->queuedIssues = json_decode($queue, true);
         }
     }
@@ -43,7 +46,7 @@ class JiraShell
     public function __destruct()
     {
         if (!empty($this->queuedIssues)) {
-            file_put_contents(self::queueFilePath, json_encode($this->queuedIssues, JSON_FORCE_OBJECT));
+            file_put_contents($this->queueFilePath, json_encode($this->queuedIssues, JSON_FORCE_OBJECT));
         }
     }
 
@@ -81,7 +84,7 @@ class JiraShell
 
     public function flushQueue()
     {
-        $queue = json_decode(file_get_contents(self::queueFilePath), true);
+        $queue = json_decode(file_get_contents($this->queueFilePath), true);
         foreach ($queue as $issue) {
             list($title, $description, $subtasks) = $issue;
             $this->createIssue($title, $description, $subtasks);
@@ -105,7 +108,7 @@ class JiraShell
 
     public function sendQueue()
     {
-        $queue = json_decode(file_get_contents(self::queueFilePath), true);
+        $queue = json_decode(file_get_contents($this->queueFilePath), true);
         foreach ($queue as $issue) {
             $this->sendIssue($this->jsonEncodeData($issue));
         }
