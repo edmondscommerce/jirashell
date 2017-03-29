@@ -1,6 +1,8 @@
 <?php
 
-class jiraShell
+namespace EdmondsCommerce\JiraShell;
+
+class JiraShell
 {
     private $jiraUrl = true;
     private $jiraUser = true;
