@@ -138,5 +138,32 @@ class JiraShell
         }
         return $obj;
     }
+
+    /**
+     * Prints the Jira Issue Queue to a sane format for preview purposes
+     */
+    public function printQueue()
+    {
+        if(!is_array($this->queuedIssues))
+        {
+            echo "No issues found".PHP_EOL;
+            return;
+        }
+
+        echo 'Queued Jira Issues'.PHP_EOL;
+        echo '#########################'.PHP_EOL;
+
+        foreach($this->queuedIssues as $queuedIssue)
+        {
+            echo '-----------------------------------------------------------------------------------------------'.PHP_EOL;
+            $this->printIssue($queuedIssue);
+        }
+    }
+
+    public function printIssue(array $task)
+    {
+        echo 'Name: '.$task[0].PHP_EOL;
+        echo 'Description: '.$task[1].PHP_EOL;
+    }
 }
 
