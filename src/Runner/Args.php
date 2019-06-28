@@ -24,7 +24,7 @@ class Args
      */
     public function __construct(array $argv, int $argc)
     {
-        if ($argc !== \count(self::ARGS)) {
+        if ($argc !== (\count(self::ARGS) + 1)) {
             throw new \RuntimeException(
                 'Usage: command [queue file path] [env file path]'
             );
