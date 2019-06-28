@@ -24,5 +24,10 @@
   "require": {
     "ext-json": "*",
     "ext-curl": "*"
-  }
+  },
+  "bin": [
+    "bin/jiraShellPreviewTickets.php",
+    "bin/jiraShellTest.php",
+    "bin/jiraShellSendTickets.php"
+  ]
 }
