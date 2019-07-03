@@ -17,8 +17,6 @@ readonly _jiraProject=jira_project;
 You can now queue a set of tickets for JiraShell to send. You can do this using:
 
 ```php
-<?php declare(strict_types=1);
-
 $jiraShell = new EdmondsCommerce\JiraShell\JiraShell(
     '/path/to/queue.json',
     '/path/to/env'
