@@ -49,7 +49,7 @@ class JiraShell
 
     protected function createIssueData($title, $description, $parent = null)
     {
-        $type = $parent ? 'Sub-task' : 'Task';
+        $type = $parent ? 'Sub-Task' : 'Task';
 
         $data = [
             'fields' => [
