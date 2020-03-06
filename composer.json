@@ -29,5 +29,8 @@
     "bin/jiraShellPreviewTickets.php",
     "bin/jiraShellTest.php",
     "bin/jiraShellSendTickets.php"
-  ]
+  ],
+  "require-dev": {
+    "edmondscommerce/phpqa": "dev-master"
+  }
 }
